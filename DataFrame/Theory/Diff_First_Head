@@ -1,0 +1,25 @@
+Question - Difference between first(), head() , head(1) , take(1)
+
+val tuf=df.first() // we dont specify the parameter
+val tuf =df.head() // we can specify the parameter if we want
+
+The Datatype is Row
+
+val fgh=df.head(1)
+val fgh=df.take(1)  // Compulsory to specify parameter
+
+The Datatype is Array[Row]
+
+Note - So instead of calling head(), use head(1) directly to get the array.
+We won't have to catch a java.util.NoSuchElementException exception when the DataFrame is empty.
+
+========================================
+Question 
+
+Is the underlying implementation of first() the same as take(1)?
+Suppose rdd1 and rdd2 are constructed from the same csv, can I safely assume that rdd1.take(1) and rdd2.first() will always return the same result, i.e., the first row of the csv? What if rdd1 and rdd2 are partitioned differently?
+
+Answer
+
+first calls take(1) and returns the first element if found.
+Partitions in RDD are ordered, the physical first line in your CSV will end up in the 0th partition on RDD. And take(1) and first both will return that first row of 0th partition.
