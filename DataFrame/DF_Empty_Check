@@ -1,0 +1,19 @@
+How to find Dataframe is empty or not ?
+
+val tt=spark.emptyDataFrame
+
+  if(tt.count() > 0)
+    println("True")
+  else
+    println("False result of first approach")
+
+
+  if(!tt.head(1).isEmpty)
+    println("True")
+  else
+    println("False result of second approach")
+
+  if(!tt.rdd.isEmpty)
+    println("True")
+  else
+    println("False result of third approach")
